@@ -34,3 +34,10 @@ const questions = [
 
 //function to write svg
 //function to init app
+function init(){
+    inquirer.prompt(questions)
+    .then(data => {
+        console.log(data);
+    })
+};
+init();
