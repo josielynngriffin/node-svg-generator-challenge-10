@@ -13,6 +13,14 @@ const questions = [
         type:'input',
         message:'Enter a name for your logo that is up to three characters long:',
         name: 'name',
+        validate: function validateName(input){
+            if(input.length >= 4){
+                console.log("Your logo's name must be three characters or less");
+                return false
+            } else {
+                return true
+            };
+        }
     },
     {
         type:'input',
@@ -33,6 +41,14 @@ const questions = [
 ]
 
 //function to write svg
+function renderSvg(fileName, shape){
+    fs.writeFile(`./examples/${shape.name}.svg`, shape.render(), err=>{
+        if(err) {
+            return console.log(err);
+        }
+        console.log('file successfully rendered');
+    })
+}
 //function to init app
 function init(){
     inquirer.prompt(questions)
