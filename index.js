@@ -41,7 +41,7 @@ const questions = [
 ]
 
 //function to write svg
-function renderSvg(fileName, shape){
+function writeSvg(fileName, shape){
     fs.writeFile(`./examples/${shape.name}.svg`, shape.render(), err=>{
         if(err) {
             return console.log(err);
@@ -54,6 +54,19 @@ function init(){
     inquirer.prompt(questions)
     .then(data => {
         console.log(data);
+        switch(data.shape) {
+            case('Triangle'):
+            return logo = new Triangle(data.shape, data.shapeColor, data.textColor, data.name);
+            break;
+            case('Circle'):
+            return logo = new Circle(data.shape, data.shapeColor, data.textColor, data.name);
+            break;
+            case('Square'):
+            return logo = new Square(data.shape,data.shapeColor, data.textColor, data.name);
+            break;
+        }
+    }).then (logo => {
+        writeSvg(logo.name, logo);
     })
 };
 init();
